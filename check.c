@@ -12,57 +12,96 @@
 
 #include "main.h"
 
-static tetri	*quit(tetri	*dest)
+static unsigned int	linkcount(int i, int j, tetri *te)
 {
-	free(dest);
-	return (NULL);
+	unsigned int count;
+
+	count = 0;
+	if (i - 1 >= 0 && (te[i - 1] & (1 << j)))
+		count++;
+	if (j - 1 >= 0 && (te[i] & (1 << (j - 1))))
+		count++;
+	if (i + 1 < 4 && (te[i + 1] & (1 << j)))
+		count++;
+	if (j + 1 < 4 && (te[i] & (1 << (j + 1))))
+		count++;
+	return (count);
 }
 
-tetri			*gettetri(const char *str)
+int					isvalid_tetri(const tetri *te)
 {
-	tetri	*dest;
-	int		i, j, k, lim;
+	int				i, j;
+	unsigned int	bitcount, linkcount;
 
-	lim = strlen(str) / 21;
-	if (strlen(str) % 21 != 1 ||
-	!(dest = (tetri *)malloc(sizeof(tetri) * (lim + 1))))
-		return (NULL);
-	int i = 0;
-	while (i < lim)
+	i = 0;
+	while (i < 4)
 	{
 		j = 0;
 		while (j < 4)
 		{
-			k = 0;
-			while (k < 4)
+			if (te[i] & (1 << j))
 			{
-				if (*str == '#')
-					dest[i][j][k] = 'A' + i;
-				else if (*str == '.')
-					dest[i][j][k] = *str;
-				else
-					return (quit(dest));
-				str++;
-				k++;
+				bitcount++;
+				linkcount = linkcount(i, j, te);
 			}
-			if (*str != '\n')
-				return (quit(dest));
-			str++;
 			j++;
 		}
-		if (*str != '\n')
-			return (quit(dest));
-		str++;
+		i++;
+	}
+	if (bitcount != 4 || (linkcount != 6 && linkcount != 8))
+		return (0);
+	return (1);
+}
+
+tetri				*getvalid_tetri(char **str, char letter)
+{
+	tetri	*dest;
+
+	if (!(dest = fillnew_tetri(str, letter))
+	|| !isvalid_tetri(dest))
+	{
+		free_tetri(&dest);
+		return (NULL);
 	}
 	return (dest);
 }
 
-int				subisvalid(tetri *te)
+static tetri		*quit(tetri	*dest)
 {
+	tetri	*run;
 
+	run = dest;
+	while (run)
+	{
+		free_tetri(&run);
+		run++;
+	}
+	free(dest);
+	return (NULL);
 }
 
-int				isvalid(tetri *te)
+tetri				*get_tetritab(const char *str)
 {
+	tetri	*dest, *run;
+	int		i, lim;
 
+	lim = ft_strlen(str) / 21;
+	if (ft_strlen(str) % 21 != 1 ||
+	!(dest = (tetri *)malloc(sizeof(tetri) * (lim + 1))))
+		return (NULL);
+	run = dest;
+	int i = 0;
+	while (i<lim && (run = getvalid_tetri(&str, 'A' + i)))
+	{
+		i++;
+		if (i != lim)
+		{
+			if (*str != '\n')
+				return (quit(dest));
+			str++;
+		}
+	}
+	if (i != lim || *str == '\0')
+		return (quit(dest));
+	return (dest);
 }

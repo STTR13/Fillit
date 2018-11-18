@@ -80,7 +80,7 @@ char			*standi_reader(void)
 	return (reader(0));
 }
 
-char			*file_reader(char *filename)
+char			*file_reader(const char *filename)
 {
 	int		filedesc;
 	char	*r;

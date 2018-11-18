@@ -28,7 +28,7 @@ static unsigned int	linkcount(int i, int j, const tetri *te)
 	return (count);
 }
 
-int					isvalidingrid_tetri(const tetri *te, unsigned short size)
+int					isvalid_tetri(const tetri *te, unsigned short gsize)
 {
 	int				i, j;
 	unsigned int	bitcounter, linkcounter;
@@ -36,10 +36,10 @@ int					isvalidingrid_tetri(const tetri *te, unsigned short size)
 	bitcounter = 0;
 	linkcounter = 0;
 	i = 0;
-	while (i < size)
+	while (i < gsize)
 	{
 		j = 0;
-		while (j < size)
+		while (j < gsize)
 		{
 			if (te->tab[i] & (1 << j))
 			{
@@ -55,17 +55,12 @@ int					isvalidingrid_tetri(const tetri *te, unsigned short size)
 	return (1);
 }
 
-int					isvalid_tetri(const tetri *te)
-{
-	return (isvalidingrid_tetri(te, 4));
-}
-
 tetri				*getvalid_tetri(char **str, char letter)
 {
 	tetri	*dest;
 
 	if (!(dest = fillnew_tetri(str, letter))
-	|| !isvalid_tetri(dest)
+	|| !isvalid_tetri(dest, 4)
 	|| !movetopleft_tetri(dest, 4))
 	{
 		free_tetri(&dest);

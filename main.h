@@ -49,7 +49,7 @@ typedef struct	s_node
 
 typedef struct	s_grid
 {
-	unsigned short	size;
+	unsigned short	gsize;
 	node			*incr;
 	unsigned short	tab[16];
 }				grid;
@@ -67,16 +67,15 @@ char			*file_reader(const char *filename);
 /*
 **		check.c
 */
-int				isvalid_tetri(const tetri *te);
-int				isvalidingrid_tetri(const tetri *te, unsigned short size);
+int				isvalid_tetri(const tetri *te, unsigned short gsize);
 tetri			*getvalid_tetri(char **str, char letter);
 tetri			*get_tetritab(const char *str);
 
 /*
 **		move.c
 */
-int				moveingrid_tetri(tetri *te, int x, int y, unsigned short size);
-int				movetopleft_tetri(tetri *te, unsigned short size);
+int				move_tetri(tetri *te, int x, int y, unsigned short gsize);
+int				movetopleft_tetri(tetri *te, unsigned short gsize);
 
 /*
 **		inter.c

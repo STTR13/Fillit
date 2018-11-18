@@ -12,7 +12,7 @@
 
 #include "main.h"
 
-int		moveingrid_tetri(tetri *te, int x, int y, unsigned short size)
+static void		moveonx_tetri(tetri *te, int x, unsigned short gsize)
 {
 	unsigned short	t[16];
 	int				i;
@@ -22,53 +22,60 @@ int		moveingrid_tetri(tetri *te, int x, int y, unsigned short size)
 		i = -1;
 		while (++i < x)
 			t[i] = 0;
-		while (++i < size)
+		while (++i < gsize)
 			t[i] = te->tab[i - x];
 		i = -1;
-		while (++i < size)
+		while (++i < gsize)
 			te->tab[i] = t[i];
 	}
 	else if (x < 0)
 	{
-		i = size;
-		while (--i >= size + x)
+		i = gsize;
+		while (--i >= gsize + x)
 			t[i] = 0;
 		while (--i > 0)
 			t[i] = te->tab[i - x];
 		i = -1;
-		while (++i < size)
+		while (++i < gsize)
 			te->tab[i] = t[i];
 	}
+}
+
+int				move_tetri(tetri *te, int x, int y, unsigned short gsize)
+{
+	int				i;
+
+	moveonx_tetri(te, x, gsize);
 	if (y > 0)
 	{
 		i = -1;
-		while (++i < size)
+		while (++i < gsize)
 			t[i] >>> y;
 	}
 	if (y < 0)
 	{
 		i = -1;
-		while (++i < size)
+		while (++i < gsize)
 			t[i] << -y;
 	}
-	return (isvalidingrid_tetri(te, size));
+	return (isvalid_tetri(te, gsize));
 }
 
-int		movetopleft_tetri(tetri *te, unsigned short size)
+int				movetopleft_tetri(tetri *te, unsigned short gsize)
 {
 	int x, y, i, j;
 
 	i = 0;
-	while (i < size && !te->tab[i])
+	while (i < gsize && !te->tab[i])
 		i++;
 	x = i;
-	y = size;
-	while (i < size && !te->tab[i])
+	y = gsize;
+	while (i < gsize && !te->tab[i])
 	{
 		j = 0;
-		while (j < size && !(te->tab[i] & (1 << j)))
+		while (j < gsize && !(te->tab[i] & (1 << j)))
 			j++;
 		y = (j < y) ? j : y;
 	}
-	return (moveingrid_tetri(te, x, y, size));
+	return (move_tetri(te, x, y, gsize));
 }

@@ -12,7 +12,7 @@
 
 NAME = fillit
 
-SRC =
+SRC = check.c grid.c inter.c move.c reader.c tetri.c
 INCLUDES = main.h
 OBJ =
 LIB = libft/
@@ -34,4 +34,4 @@ fclean: clean
 re: fclean all
 
 lib:
-	make -C $(LIB)
+	make re -C $(LIB)

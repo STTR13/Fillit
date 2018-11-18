@@ -12,45 +12,52 @@
 
 #include "main.h"
 
-static unsigned int	linkcount(int i, int j, tetri *te)
+static unsigned int	linkcount(int i, int j, const tetri *te)
 {
 	unsigned int count;
 
 	count = 0;
-	if (i - 1 >= 0 && (te[i - 1] & (1 << j)))
+	if (i - 1 >= 0 && (te->tab[i - 1] & (1 << j)))
 		count++;
-	if (j - 1 >= 0 && (te[i] & (1 << (j - 1))))
+	if (j - 1 >= 0 && (te->tab[i] & (1 << (j - 1))))
 		count++;
-	if (i + 1 < 4 && (te[i + 1] & (1 << j)))
+	if (i + 1 < 4 && (te->tab[i + 1] & (1 << j)))
 		count++;
-	if (j + 1 < 4 && (te[i] & (1 << (j + 1))))
+	if (j + 1 < 4 && (te->tab[i] & (1 << (j + 1))))
 		count++;
 	return (count);
 }
 
-int					isvalid_tetri(const tetri *te)
+int					isvalidingrid_tetri(const tetri *te, unsigned short size)
 {
 	int				i, j;
-	unsigned int	bitcount, linkcount;
+	unsigned int	bitcounter, linkcounter;
 
+	bitcounter = 0;
+	linkcounter = 0;
 	i = 0;
-	while (i < 4)
+	while (i < size)
 	{
 		j = 0;
-		while (j < 4)
+		while (j < size)
 		{
-			if (te[i] & (1 << j))
+			if (te->tab[i] & (1 << j))
 			{
-				bitcount++;
-				linkcount = linkcount(i, j, te);
+				bitcounter++;
+				linkcounter = linkcount(i, j, te);
 			}
 			j++;
 		}
 		i++;
 	}
-	if (bitcount != 4 || (linkcount != 6 && linkcount != 8))
+	if (bitcounter != 4 || (linkcounter != 6 && linkcounter != 8))
 		return (0);
 	return (1);
+}
+
+int					isvalid_tetri(const tetri *te)
+{
+	return (isvalidingrid_tetri(te, 4));
 }
 
 tetri				*getvalid_tetri(char **str, char letter)
@@ -58,7 +65,8 @@ tetri				*getvalid_tetri(char **str, char letter)
 	tetri	*dest;
 
 	if (!(dest = fillnew_tetri(str, letter))
-	|| !isvalid_tetri(dest))
+	|| !isvalid_tetri(dest)
+	|| !movetopleft_tetri(dest, 4))
 	{
 		free_tetri(&dest);
 		return (NULL);
@@ -90,8 +98,8 @@ tetri				*get_tetritab(const char *str)
 	!(dest = (tetri *)malloc(sizeof(tetri) * (lim + 1))))
 		return (NULL);
 	run = dest;
-	int i = 0;
-	while (i<lim && (run = getvalid_tetri(&str, 'A' + i)))
+	i = 0;
+	while (i < lim && (run = getvalid_tetri((char **)(&str), 'A' + i)))
 	{
 		i++;
 		if (i != lim)

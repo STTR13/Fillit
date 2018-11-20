@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "fillit.h"
 
 void	free_tetri(tetri **te)
 {
@@ -20,21 +20,21 @@ void	free_tetri(tetri **te)
 
 tetri	*new_tetri(void)
 {
-	tetri *dest;
+	tetri	*dest;
+	short	i;
 
 	if (!(dest = (tetri *)malloc(sizeof(tetri))))
 		return (NULL);
 	dest->letter = '\0';
-	dest->tab[0] = 0;
-	dest->tab[1] = 0;
-	dest->tab[2] = 0;
-	dest->tab[3] = 0;
+	i = 0;
+	while (i < 16)
+		dest->tab[i++] = 0;
 	return (dest);
 }
 
 int		fill_tetri(tetri *te, char **str, char letter)
 {
-	unsigned int	i, j;
+	unsigned short	i, j;
 
 	te->letter = letter;
 	i = 0;

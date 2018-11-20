@@ -46,6 +46,10 @@ typedef struct	s_node
 /*
 **		node.c
 */
+void			free_node(node **n);
+node			new_node(void);
+int				add_node(node **n, tetri *te);
+void			rm_node(node **n);
 
 typedef struct	s_grid
 {
@@ -56,6 +60,10 @@ typedef struct	s_grid
 /*
 **		grid.c
 */
+void			free_grid(grid **g);
+grid			*new_grid(unsigned short gsize);
+int				insertetri_grid(grid *g, tetri *te);
+int				rmlastetri_grid(grid *g);
 
 /*
 **		reader.c
@@ -76,9 +84,5 @@ tetri			*get_tetritab(const char *str);
 */
 int				move_tetri(tetri *te, int x, int y, unsigned short gsize);
 int				movetopleft_tetri(tetri *te, unsigned short gsize);
-
-/*
-**		inter.c
-*/
 
 #endif

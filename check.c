@@ -44,7 +44,7 @@ int					isvalid_tetri(const tetri *te, unsigned short gsize)
 			if (te->tab[i] & (1 << j))
 			{
 				bitcounter++;
-				linkcounter = linkcount(i, j, te);
+				linkcounter += linkcount(i, j, te);
 			}
 			j++;
 		}

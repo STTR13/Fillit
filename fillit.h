@@ -47,7 +47,7 @@ typedef struct	s_node
 **		node.c
 */
 void			free_node(node **n);
-node			new_node(void);
+node			*new_node(void);
 int				add_node(node **n, tetri *te);
 void			rm_node(node **n);
 
@@ -63,7 +63,7 @@ typedef struct	s_grid
 void			free_grid(grid **g);
 grid			*new_grid(unsigned short gsize);
 int				insertetri_grid(grid *g, tetri *te);
-int				rmlastetri_grid(grid *g);
+void			rmlastetri_grid(grid *g);
 
 /*
 **		reader.c

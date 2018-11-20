@@ -14,7 +14,7 @@
 
 void	free_grid(grid **g)
 {
-	free_node(&g->incr);
+	free_node(&(*g)->incr);
 	free(*g);
 	*g = NULL;
 }

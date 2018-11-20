@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "fillit.h"
 
 static unsigned int	linkcount(int i, int j, const tetri *te)
 {

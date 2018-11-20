@@ -73,16 +73,16 @@ int				move_tetri(tetri *te, int x, int y, unsigned short gsize)
 			while (++j < -y)
 				if (te->tab[i] & (1 << j))
 					return (0);
-			t[i] >>> -y;
+			te->tab[i] = te->tab[i] >>> -y;
 		}
 	if (y > 0)
 		while (++i < gsize)
 		{
-			j = size;
-			while (--j > size - y)
+			j = gsize;
+			while (--j > gsize - y)
 				if (te->tab[i] & (1 << j))
 					return (0);
-			t[i] << y;
+			te->tab[i] = te->tab[i] << y;
 		}
 	return (1);
 }

@@ -27,7 +27,7 @@ void	free_node(node **n)
 		*n = NULL;
 }
 
-node	new_node(void)
+node	*new_node(void)
 {
 	node *dest;
 

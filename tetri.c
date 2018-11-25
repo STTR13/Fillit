@@ -32,7 +32,7 @@ tetri	*new_tetri(void)
 	return (dest);
 }
 
-int		fill_tetri(tetri *te, char **str, char letter)
+boolean	fill_tetri(tetri *te, char **str, char letter)
 {
 	unsigned short	i, j;
 
@@ -48,16 +48,16 @@ int		fill_tetri(tetri *te, char **str, char letter)
 			else if (**str == '.')
 				te->tab[i] |= (0 << j);
 			else
-				return (1);
+				return (0);
 			(*str)++;
 			j++;
 		}
 		if (**str != '\n')
-			return (1);
+			return (0);
 		(*str)++;
 		i++;
 	}
-	return (0);
+	return (1);
 }
 
 tetri	*fillnew_tetri(char **str, char letter)
@@ -65,7 +65,7 @@ tetri	*fillnew_tetri(char **str, char letter)
 	tetri *dest;
 
 	if (!(dest = new_tetri())
-	|| fill_tetri(dest, str, letter))
+	|| !fill_tetri(dest, str, letter))
 	{
 		free_tetri(&dest);
 		return (NULL);

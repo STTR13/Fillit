@@ -21,7 +21,7 @@ void	free_node(node **n)
 	if (t != NULL)
 	{
 		*n = t;
-		free_node(n);
+		free_node(&t);
 	}
 	else
 		*n = NULL;
@@ -38,15 +38,23 @@ node	*new_node(void)
 	return (dest);
 }
 
-int		add_node(node **n, tetri *te)
+boolean	add_node(node **n, tetri *te)
 {
-	node *dest;
+	node *dest, *t;
 
 	if (!(dest = (node *)malloc(sizeof(node))))
 		return (0);
-	dest->next = *n;
+	dest->next = NULL;
 	dest->te = te;
-	*n = dest;
+	if (!*n)
+		*n = dest;
+	else
+	{
+		t = *n;
+		while (!t->next)
+			t = t->next;
+		t->next = dest;
+	}
 	return (1);
 }
 

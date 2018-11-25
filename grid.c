@@ -72,3 +72,21 @@ void	rmlastetri_grid(grid *g)
 	}
 	rm_node(&g->incr);
 }
+
+boolean	incrlastetri_grid(grid *g)
+{
+	unsigned short i;
+
+	i = 0;
+	while (i < g->gsize && !g->incr->te->tab[i])
+		i++;
+	while (i < g->gsize && g->incr->te->tab[i])
+	{
+		g->tab[i] -= g->incr->te->tab[i];
+		i++;
+	}
+	if (!move_tetri(&(g->incr->te), 0, 1, g->gsize) ||
+	movenextline_tetri(&(g->incr->te), g->gsize))
+		return ();
+	return (1);
+}

@@ -12,7 +12,7 @@
 
 #include "fillit.h"
 
-static int		moveonposx_tetri(tetri *te, int x, unsigned short gsize)
+static boolean	moveonposx_tetri(tetri *te, int x, unsigned short gsize)
 {
 	unsigned short	t[16];
 	int				i;
@@ -32,7 +32,7 @@ static int		moveonposx_tetri(tetri *te, int x, unsigned short gsize)
 	return (1);
 }
 
-static int		moveonnegx_tetri(tetri *te, int x, unsigned short gsize)
+static boolean	moveonnegx_tetri(tetri *te, int x, unsigned short gsize)
 {
 	unsigned short	t[16];
 	int				i;
@@ -57,7 +57,7 @@ static int		moveonnegx_tetri(tetri *te, int x, unsigned short gsize)
 ** exept while simultaneous move on x and y and the y move is invalid
 ** the move on x is still applied
 */
-int				move_tetri(tetri *te, int x, int y, unsigned short gsize)
+boolean			move_tetri(tetri *te, int x, int y, unsigned short gsize)
 {
 	int				i, j;
 
@@ -87,7 +87,7 @@ int				move_tetri(tetri *te, int x, int y, unsigned short gsize)
 	return (1);
 }
 
-int				movetopleft_tetri(tetri *te, unsigned short gsize)
+boolean			movetopleft_tetri(tetri *te, unsigned short gsize)
 {
 	int x, y, i, j;
 
@@ -102,6 +102,26 @@ int				movetopleft_tetri(tetri *te, unsigned short gsize)
 		while (j < gsize && !(te->tab[i] & (1 << j)))
 			j++;
 		y = (j < y) ? j : y;
+		i++;
 	}
-	return (move_tetri(te, x, y, gsize));
+	return (move_tetri(te, -x, -y, gsize));
+}
+
+boolean			movenextline_tetri(tetri *te, unsigned short gsize)
+{
+	int y, i, j;
+
+	i = 0;
+	while (i < gsize && !te->tab[i])
+		i++;
+	y = gsize;
+	while (i < gsize && te->tab[i])
+	{
+		j = 0;
+		while (j < gsize && !(te->tab[i] & (1 << j)))
+			j++;
+		y = (j < y) ? j : y;
+		i++;
+	}
+	return (move_tetri(te, 1, -y, gsize));
 }

@@ -10,12 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
+#ifndef FILLIT_H
+# define FILLIT_H
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
+
+typedef unsigned char	boolean;
 
 //# include "libft/libft.h"
 
@@ -35,8 +37,15 @@ typedef struct	s_tetri
 */
 void			free_tetri(tetri **te);
 tetri			*new_tetri(void);
-int				fill_tetri(tetri *te, char **str, char letter);
+boolean			fill_tetri(tetri *te, char **str, char letter);
 tetri			*fillnew_tetri(char **str, char letter);
+
+/*
+**		tetritab.c
+*/
+tetri			**get_tetritab(const char *str);
+short			len_tetritab(const tetri **tetab);
+boolean			movetopleft_tetritab(tetri **tetab, unsigned short gsize);
 
 typedef struct	s_node
 {
@@ -48,7 +57,7 @@ typedef struct	s_node
 */
 void			free_node(node **n);
 node			*new_node(void);
-int				add_node(node **n, tetri *te);
+boolean			add_node(node **n, tetri *te);
 void			rm_node(node **n);
 
 typedef struct	s_grid
@@ -64,6 +73,7 @@ void			free_grid(grid **g);
 grid			*new_grid(unsigned short gsize);
 int				insertetri_grid(grid *g, tetri *te);
 void			rmlastetri_grid(grid *g);
+boolean			incrlastetri_grid(grid *g)
 
 /*
 **		reader.c
@@ -77,12 +87,23 @@ char			*file_reader(const char *filename);
 */
 int				isvalid_tetri(const tetri *te, unsigned short gsize);
 tetri			*getvalid_tetri(char **str, char letter);
-tetri			*get_tetritab(const char *str);
 
 /*
 **		move.c
 */
-int				move_tetri(tetri *te, int x, int y, unsigned short gsize);
-int				movetopleft_tetri(tetri *te, unsigned short gsize);
+boolean			move_tetri(tetri *te, int x, int y, unsigned short gsize);
+boolean			movetopleft_tetri(tetri *te, unsigned short gsize);
+boolean			movenextline_tetri(tetri *te, unsigned short gsize);
+
+/*
+**		backtrack.c
+*/
+int				backtrack(grid *g, tetri **tetab);
+
+/*
+**		print.c
+*/
+void			print_grid(grid *g);
+void			print_tetri(tetri *te);
 
 #endif

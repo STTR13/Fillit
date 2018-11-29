@@ -17,7 +17,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 
-typedef unsigned char	boolean;
+typedef char	boolean;
 
 //# include "libft/libft.h"
 
@@ -31,6 +31,7 @@ typedef struct	s_tetri
 {
 	char			letter;
 	unsigned short	tab[16];
+	boolean			ising;
 }				tetri;
 /*
 **		tetri.c

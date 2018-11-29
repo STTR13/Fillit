@@ -34,7 +34,7 @@ grid	*new_grid(unsigned short gsize)
 	return (dest);
 }
 
-int		insertetri_grid(grid *g, tetri *te)
+boolean	insertetri_grid(grid *g, tetri *te)
 {
 	unsigned short i, k;
 
@@ -48,8 +48,6 @@ int		insertetri_grid(grid *g, tetri *te)
 			return (0);
 		i++;
 	}
-	if (!add_node(&g->incr, te))
-		return (-1);
 	while (k < g->gsize && te->tab[k])
 	{
 		g->tab[k] += te->tab[k];
@@ -58,35 +56,31 @@ int		insertetri_grid(grid *g, tetri *te)
 	return (1);
 }
 
-void	rmlastetri_grid(grid *g)
+void	rmtetri_grid(grid *g, tetri *te)
 {
 	unsigned short i;
 
-	i = 0;
-	while (i < g->gsize && !g->incr->te->tab[i])
-		i++;
-	while (i < g->gsize && g->incr->te->tab[i])
+	if (te->ising)
 	{
-		g->tab[i] -= g->incr->te->tab[i];
-		i++;
+		i = 0;
+		while (i < g->gsize && !te->tab[i])
+			i++;
+		while (i < g->gsize && te->tab[i])
+		{
+			g->tab[i] -= te->tab[i];
+			i++;
+		}
+		te->ising = 0;
 	}
-	rm_node(&g->incr);
 }
 
-boolean	incrlastetri_grid(grid *g)
+boolean	incrtetri_grid(grid *g, tetri *te)
 {
-	unsigned short i;
-
-	i = 0;
-	while (i < g->gsize && !g->incr->te->tab[i])
-		i++;
-	while (i < g->gsize && g->incr->te->tab[i])
-	{
-		g->tab[i] -= g->incr->te->tab[i];
-		i++;
-	}
-	if (!move_tetri(&(g->incr->te), 0, 1, g->gsize) ||
-	movenextline_tetri(&(g->incr->te), g->gsize))
-		return ();
+	rmtetri_grid(g, te);
+	if (!move_tetri(&te, 0, 1, g->gsize) && !movenextline_tetri(&te, g->gsize))
+		return (0);
+	te->ising = insertetri_grid(g, te);
+	if (!te->ising)
+		return (incrtetri_grid(g, te));
 	return (1);
 }

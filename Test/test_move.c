@@ -21,12 +21,7 @@ int main(int argc, char const *argv[])
   if (argc != 2)
   	printf("%s\n", "Seulement un param possible");
   str = file_reader(argv[1]);
-  test = get_tetrilist(str);
-  while (test)
-  {
-	  print_tetri(test);
-	  printf("%s\n", "error : print_tetri");
-	  test = test->next;
-  }
+
+
   return 0;
 }

@@ -12,65 +12,63 @@
 
 #include "fillit.h"
 
-static tetri		**quit(tetri **dest)
+static node			*quit(node *dest)
 {
 	unsigned short i;
 
-	while (dest[i])
-	{
-		free_tetri(&(dest[i]));
-		i++;
-	}
-	free(dest);
+	free_node(&dest);
 	return (NULL);
 }
 
-tetri				**get_tetritab(const char *str)
+node				*get_tetrilist(const char *str)
 {
-	tetri				**dest;
-	unsigned short		i, lim;
+	node				*dest, *t;
+	boolean				b;
+	int					i;
 
-	lim = (ft_strlen(str) + 1) / 21;
-	if (ft_strlen(str) % 21 != 20 ||
-	!(dest = (tetri **)malloc(sizeof(tetri *) * (lim + 1))))
+	if (ft_strlen(str) % 21 != 20)
 		return (NULL);
+	dest = NULL;
 	i = 0;
-	while (i < lim && (dest[i] = getvalid_tetri((char **)(&str), 'A' + i)))
+	while ((b = add_node(&t, getvalid_tetri((char **)(&str), 'A' + i))))
 	{
-		i++;
-		if (i != lim)
-		{
-			if (*str != '\n')
-				return (quit(dest));
+		if (*str == '\n')
 			str++;
-		}
+		else if (*str == '\0')
+			break ;
+		else
+			return (quit(dest));
+		if (!dest)
+			dest = t;
+		if (t->next)
+			t = t->next;
 	}
-	dest[i] = NULL;
-	if (i != lim || *str == '\0')
+	if (!b || *str == '\0' || b)
 		return (quit(dest));
 	return (dest);
 }
 
-short				len_tetritab(const tetri **tetab)
+short				len_tetrilist(const node *n)
 {
 	short i;
 
-	if (!tetab)
+	if (!n)
 		return (-1);
 	i = 0;
-	while (tetab[i])
+	while (n)
+	{
+		n = n->next;
 		i++;
+	}
 	return (i);
 }
 
-boolean				movetopleft_tetritab(tetri **tetab, unsigned short gsize)
+boolean				movetopleft_tetrilist(node *n, unsigned short gsize)
 {
-	short		i;
 	boolean		b;
 
-	i = 0;
 	b = 1;
-	while (tetab[i] && (b = movetopleft_tetri(tetab[i], gsize)))
-		i++;
+	while (n && (b = movetopleft_tetri(n->te, gsize)))
+		n = n->next;
 	return (b);
 }

@@ -17,6 +17,7 @@ void	free_node(node **n)
 	node *t;
 
 	t = (*n)->next;
+	free_tetri(&(*n)->te);
 	free(*n);
 	if (t != NULL)
 	{
@@ -42,7 +43,7 @@ boolean	add_node(node **n, tetri *te)
 {
 	node *dest, *t;
 
-	if (!(dest = (node *)malloc(sizeof(node))))
+	if (!te || !(dest = (node *)malloc(sizeof(node))))
 		return (0);
 	dest->next = NULL;
 	dest->te = te;

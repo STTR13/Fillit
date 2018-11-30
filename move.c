@@ -73,7 +73,7 @@ boolean			move_tetri(tetri *te, int x, int y, unsigned short gsize)
 			while (++j < -y)
 				if (te->tab[i] & (1 << j))
 					return (0);
-			te->tab[i] = te->tab[i] >>> -y;
+			te->tab[i] = te->tab[i] >> -y;
 		}
 	if (y > 0)
 		while (++i < gsize)

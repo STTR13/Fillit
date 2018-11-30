@@ -26,6 +26,7 @@ tetri	*new_tetri(void)
 	if (!(dest = (tetri *)malloc(sizeof(tetri))))
 		return (NULL);
 	dest->letter = '\0';
+	dest->ising = 0;
 	i = 0;
 	while (i < 16)
 		dest->tab[i++] = 0;

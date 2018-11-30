@@ -17,9 +17,9 @@
 # include <unistd.h>
 # include <fcntl.h>
 
-typedef unsigned char	boolean;
+typedef char	boolean;
 
-//# include "libft/libft.h"
+# include "libft/includes/libft.h"
 
 /*
 **	0 -- > y
@@ -31,6 +31,7 @@ typedef struct	s_tetri
 {
 	char			letter;
 	unsigned short	tab[16];
+	boolean			ising;
 }				tetri;
 /*
 **		tetri.c
@@ -71,9 +72,9 @@ typedef struct	s_grid
 */
 void			free_grid(grid **g);
 grid			*new_grid(unsigned short gsize);
-int				insertetri_grid(grid *g, tetri *te);
+boolean				insertetri_grid(grid *g, tetri *te);
 void			rmlastetri_grid(grid *g);
-boolean			incrlastetri_grid(grid *g)
+boolean			incrlastetri_grid(grid *g);
 
 /*
 **		reader.c
@@ -103,7 +104,7 @@ int				backtrack(grid *g, tetri **tetab);
 /*
 **		print.c
 */
-void			print_grid(grid *g);
+boolean			print_grid(grid *g);
 void			print_tetri(tetri *te);
 
 #endif

@@ -15,26 +15,27 @@ NAME = fillit
 SRC = $(wildcard ./*.c)
 INCLUDES = $(wildcard ./*.h)
 OBJ = $(SRC:.c=.o)
-LIB = libft/
+PATH_LIB = libft/
 LIBFT = libft/libft.a
+CC = gcc
+FLAG = -Wall -Wextra -Werror
 
 .PHONY : all clean fclean re lib
 
 all: $(NAME)
 
 $(NAME): lib
-	gcc -Wall -Wextra -Werror -c $(SRC) -I $(INCLUDES)
-	gcc -Wall -Wextra -Werror $(OBJ) $(LIBFT) -o $(NAME)
+	@$(CC) $(FLAG) -c $(SRC) -I $(INCLUDES)
+	@$(CC) $(FLAG) $(OBJ) $(LIBFT) -o $(NAME)
 
 clean:
-	/bin/rm -f $(OBJ)
-
+	@/bin/rm -f $(OBJ)
 
 fclean: clean
-	/bin/rm -f $(NAME)
-	make fclean -C $(LIB)
+	@/bin/rm -f $(NAME)
+	@make fclean -C $(PATH_LIB)
 
 re: fclean all
 
 lib:
-	make re -C $(LIB)
+	@make re -C $(PATH_LIB)

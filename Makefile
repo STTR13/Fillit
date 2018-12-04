@@ -12,16 +12,19 @@
 
 NAME = fillit
 
-SRC = check.c grid.c inter.c move.c reader.c tetri.c
-INCLUDES = main.h
-OBJ =
+SRC = $(wildcard ./*.c)
+INCLUDES = $(wildcard ./*.h)
+OBJ = $(SRC:.c=.o)
 LIB = libft/
+LIBFT = libft/libft.a
+
+.PHONY : all clean fclean re lib
 
 all: $(NAME)
 
 $(NAME): lib
 	gcc -Wall -Wextra -Werror -c $(SRC) -I $(INCLUDES)
-	gcc -Wall -Wextra -Werror $(OBJ) -o $(NAME)
+	gcc -Wall -Wextra -Werror $(OBJ) $(LIBFT) -o $(NAME)
 
 clean:
 	/bin/rm -f $(OBJ)

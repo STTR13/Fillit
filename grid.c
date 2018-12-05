@@ -12,14 +12,14 @@
 
 #include "fillit.h"
 
-void	free_grid(grid **g)
+void			free_grid(grid **g)
 {
 	free_node(&(*g)->incr);
 	free(*g);
 	*g = NULL;
 }
 
-grid	*new_grid(unsigned short gsize)
+grid			*new_grid(unsigned short gsize)
 {
 	grid	*dest;
 	short	i;
@@ -34,7 +34,7 @@ grid	*new_grid(unsigned short gsize)
 	return (dest);
 }
 
-boolean	insertetri_grid(grid *g, tetri *te)
+boolean			insertetri_grid(grid *g, tetri *te)
 {
 	unsigned short i, k;
 
@@ -56,7 +56,7 @@ boolean	insertetri_grid(grid *g, tetri *te)
 	return (1);
 }
 
-void	rmtetri_grid(grid *g, tetri *te)
+void			rmtetri_grid(grid *g, tetri *te)
 {
 	unsigned short i;
 
@@ -74,13 +74,20 @@ void	rmtetri_grid(grid *g, tetri *te)
 	}
 }
 
-boolean	incrtetri_grid(grid *g, tetri *te)
+static boolean	incrtetri_grid_sub(grid *g, tetri *te)
 {
 	rmtetri_grid(g, te);
 	if (!move_tetri(te, 0, 1, g->gsize) && !movenextline_tetri(te, g->gsize))
 		return (0);
 	te->ising = insertetri_grid(g, te);
 	if (!te->ising)
-		return (incrtetri_grid(g, te));
+		return (incrtetri_grid_sub(g, te));
 	return (1);
+}
+
+boolean			incrtetri_grid(grid *g, tetri *te)
+{
+	if (!te->ising && (te->ising = insertetri_grid(g, te)))
+		return (1);
+	return (incrtetri_grid(g, te));
 }

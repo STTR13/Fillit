@@ -41,13 +41,6 @@ tetri			*new_tetri(void);
 boolean			fill_tetri(tetri *te, char **str, char letter);
 tetri			*fillnew_tetri(char **str, char letter);
 
-/*
-**		tetritab.c
-*/
-tetri			**get_tetritab(const char *str);
-short			len_tetritab(const tetri **tetab);
-boolean			movetopleft_tetritab(tetri **tetab, unsigned short gsize);
-
 typedef struct	s_node
 {
 	tetri			*te;
@@ -61,6 +54,13 @@ node			*new_node(void);
 boolean			add_node(node **n, tetri *te);
 void			rm_node(node **n);
 
+/*
+**		tetrilist.c
+*/
+node			*get_tetrilist(const char *str);
+short			len_tetrilist(const node *n);
+boolean			movetopleft_tetrilist(node *n, unsigned short gsize);
+
 typedef struct	s_grid
 {
 	unsigned short	gsize;
@@ -72,8 +72,8 @@ typedef struct	s_grid
 */
 void			free_grid(grid **g);
 grid			*new_grid(unsigned short gsize);
-boolean				insertetri_grid(grid *g, tetri *te);
-void			rmlastetri_grid(grid *g);
+boolean			insertetri_grid(grid *g, tetri *te);
+void			rmtetri_grid(grid *g, tetri *te);
 boolean			incrlastetri_grid(grid *g);
 
 /*
@@ -93,13 +93,13 @@ tetri			*getvalid_tetri(char **str, char letter);
 **		move.c
 */
 boolean			move_tetri(tetri *te, int x, int y, unsigned short gsize);
-boolean			movetopleft_tetri(tetri *te, unsigned short gsize);
+void			movetopleft_tetri(tetri *te, unsigned short gsize);
 boolean			movenextline_tetri(tetri *te, unsigned short gsize);
 
 /*
 **		backtrack.c
 */
-int				backtrack(grid *g, tetri **tetab);
+boolean			backtrack(grid *g);
 
 /*
 **		print.c

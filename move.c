@@ -87,7 +87,7 @@ boolean			move_tetri(tetri *te, int x, int y, unsigned short gsize)
 	return (1);
 }
 
-boolean			movetopleft_tetri(tetri *te, unsigned short gsize)
+void			movetopleft_tetri(tetri *te, unsigned short gsize)
 {
 	int x, y, i, j;
 
@@ -104,7 +104,8 @@ boolean			movetopleft_tetri(tetri *te, unsigned short gsize)
 		y = (j < y) ? j : y;
 		i++;
 	}
-	return (move_tetri(te, -x, -y, gsize));
+	if (move_tetri(te, -x, -y, gsize) == 0)
+		exit;//(ni)
 }
 
 boolean			movenextline_tetri(tetri *te, unsigned short gsize)

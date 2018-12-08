@@ -30,7 +30,7 @@ static void		insertetri_strgrid(char *sg, tetri *te, unsigned short gsize)
 	}
 }
 
-boolean			print_grid(grid *g)
+boolean			print_grid(const grid *g)
 {
 	char	*dest;
 	node	*run;
@@ -46,7 +46,7 @@ boolean			print_grid(grid *g)
 	return (1);
 }
 
-void			print_tetri(tetri *te)
+void			print_tetri(const tetri *te)
 {
 	short i, j;
 
@@ -67,7 +67,7 @@ void			print_tetri(tetri *te)
 	}
 }
 
-void			print_tetriing(tetri *te, unsigned short gsize)
+void			print_tetriing(const tetri *te, unsigned short gsize)
 {
 	short i, j;
 

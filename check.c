@@ -60,11 +60,11 @@ tetri				*getvalid_tetri(char **str, char letter)
 	tetri	*dest;
 
 	if (!(dest = fillnew_tetri(str, letter))
-	|| !isvalid_tetri(dest, 4)
-	|| !movetopleft_tetri(dest, 4))
+	|| !isvalid_tetri(dest, 4))
 	{
 		free_tetri(&dest);
 		return (NULL);
 	}
+	movetopleft_tetri(dest, 4);
 	return (dest);
 }

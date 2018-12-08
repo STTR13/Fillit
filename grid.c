@@ -14,9 +14,12 @@
 
 void			free_grid(grid **g)
 {
-	free_node(&(*g)->incr);
-	free(*g);
-	*g = NULL;
+	if (*g)
+	{
+		free_node(&(*g)->incr);
+		free(*g);
+		*g = NULL;
+	}
 }
 
 grid			*new_grid(unsigned short gsize)
@@ -89,5 +92,5 @@ boolean			incrtetri_grid(grid *g, tetri *te)
 {
 	if (!te->ising && (te->ising = insertetri_grid(g, te)))
 		return (1);
-	return (incrtetri_grid(g, te));
+	return (incrtetri_grid_sub(g, te));
 }

@@ -14,8 +14,6 @@
 
 static node			*quit(node *dest)
 {
-	unsigned short i;
-
 	free_node(&dest);
 	return (NULL);
 }
@@ -61,14 +59,4 @@ short				len_tetrilist(const node *n)
 		i++;
 	}
 	return (i);
-}
-
-boolean				movetopleft_tetrilist(node *n, unsigned short gsize)
-{
-	boolean		b;
-
-	b = 1;
-	while (n && (b = movetopleft_tetri(n->te, gsize)))
-		n = n->next;
-	return (b);
 }

@@ -18,14 +18,15 @@ static boolean	backtrack_sub(grid *g, node *n)
 {
 	if (n == NULL)
 		return (1);
-	movetopleft_tetri(n->te);
+	movetopleft_tetri(n->te, g->gsize);
 	while (incrtetri_grid(g, n->te))
 		if (backtrack_sub(g, n->next))
 			return (1);
 	return (0);
 }
 
-boolean			backtrack(grid *g)
+void			backtrack(grid *g)
 {
-	return (backtrack_sub(g, g->incr));
+	while (!backtrack_sub(g, g->incr))
+		g->gsize++;
 }

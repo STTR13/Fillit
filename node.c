@@ -16,16 +16,19 @@ void	free_node(node **n)
 {
 	node *t;
 
-	t = (*n)->next;
-	free_tetri(&(*n)->te);
-	free(*n);
-	if (t != NULL)
+	if (*n)
 	{
-		*n = t;
-		free_node(&t);
+		t = (*n)->next;
+		free_tetri(&(*n)->te);
+		free(*n);
+		if (t != NULL)
+		{
+			*n = t;
+			free_node(&t);
+		}
+		else
+			*n = NULL;
 	}
-	else
-		*n = NULL;
 }
 
 node	*new_node(void)

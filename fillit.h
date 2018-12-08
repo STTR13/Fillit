@@ -59,7 +59,6 @@ void			rm_node(node **n);
 */
 node			*get_tetrilist(const char *str);
 short			len_tetrilist(const node *n);
-boolean			movetopleft_tetrilist(node *n, unsigned short gsize);
 
 typedef struct	s_grid
 {
@@ -74,7 +73,7 @@ void			free_grid(grid **g);
 grid			*new_grid(unsigned short gsize);
 boolean			insertetri_grid(grid *g, tetri *te);
 void			rmtetri_grid(grid *g, tetri *te);
-boolean			incrlastetri_grid(grid *g);
+boolean			incrtetri_grid(grid *g, tetri *te);
 
 /*
 **		reader.c
@@ -99,12 +98,13 @@ boolean			movenextline_tetri(tetri *te, unsigned short gsize);
 /*
 **		backtrack.c
 */
-boolean			backtrack(grid *g);
+void			backtrack(grid *g);
 
 /*
 **		print.c
 */
-boolean			print_grid(grid *g);
-void			print_tetri(tetri *te);
+boolean			print_grid(const grid *g);
+void			print_tetri(const tetri *te);
+void			print_tetriing(const tetri *te, unsigned short gsize);
 
 #endif

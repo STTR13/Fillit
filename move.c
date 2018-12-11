@@ -18,14 +18,14 @@ static boolean	moveonposx_tetri(tetri *te, int x, unsigned short gsize)
 	int				i;
 
 	i = gsize;
-	while (--i > gsize - x)
+	while (--i >= gsize - x)
 		if (te->tab[i])
 			return (0);
 	i = -1;
 	while (++i < x)
 		t[i] = 0;
-	while (++i < gsize)
-		t[i] = te->tab[i - x];
+	while (i++ < gsize)
+		t[i] = te->tab[i - x - 1];
 	i = -1;
 	while (++i < gsize)
 		te->tab[i] = t[i];
@@ -37,15 +37,16 @@ static boolean	moveonnegx_tetri(tetri *te, int x, unsigned short gsize)
 	unsigned short	t[16];
 	int				i;
 
+	x *= -1;
 	i = -1;
-	while (++i < -x)
+	while (++i < x)
 		if (te->tab[i])
 			return (0);
 	i = gsize;
-	while (--i >= gsize + x)
+	while (--i >= gsize - x)
 		t[i] = 0;
-	while (--i > 0)
-		t[i] = te->tab[i - x];
+	while (i-- > 0)
+		t[i] = te->tab[i + x];
 	i = -1;
 	while (++i < gsize)
 		te->tab[i] = t[i];
@@ -65,24 +66,26 @@ boolean			move_tetri(tetri *te, int x, int y, unsigned short gsize)
 	(x > 0 && !moveonposx_tetri(te, x, gsize)) ||
 	(x < 0 && !moveonnegx_tetri(te, x, gsize)))
 		return (0);
-	i = -1;
+	i = 0;
 	if (y < 0)
-		while (++i < gsize)
+		while (i < gsize)
 		{
 			j = -1;
 			while (++j < -y)
 				if (te->tab[i] & (1 << j))
 					return (0);
 			te->tab[i] = te->tab[i] >> -y;
+			i++;
 		}
 	if (y > 0)
-		while (++i < gsize)
+		while (i < gsize)
 		{
 			j = gsize;
 			while (--j > gsize - y)
 				if (te->tab[i] & (1 << j))
 					return (0);
 			te->tab[i] = te->tab[i] << y;
+			i++;
 		}
 	return (1);
 }
@@ -96,7 +99,7 @@ void			movetopleft_tetri(tetri *te, unsigned short gsize)
 		i++;
 	x = i;
 	y = gsize;
-	while (i < gsize && te->tab[i])
+	while (i < gsize && te->tab[i] && y)
 	{
 		j = 0;
 		while (j < gsize && !(te->tab[i] & (1 << j)))

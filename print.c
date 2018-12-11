@@ -71,18 +71,22 @@ void			print_tetriing(const tetri *te, unsigned short gsize)
 {
 	short i, j;
 
-	i = 0;
-	while (i < gsize)
+	if (gsize <= 16)
 	{
-		j = 0;
-		while (j < gsize)
+		i = 0;
+		while (i < gsize)
 		{
-			if (te->tab[i] & (1 << j))
-				ft_putchar(te->letter);
-			else
-				ft_putchar('.');
-			j++;
+			j = 0;
+			while (j < gsize)
+			{
+				if (te->tab[i] & (1 << j))
+					ft_putchar(te->letter);
+				else
+					ft_putchar('.');
+				j++;
+			}
+			i++;
+			ft_putchar('\n');
 		}
-		i++;
 	}
 }

@@ -24,7 +24,7 @@ node				*get_tetrilist(const char *str)
 	boolean				b;
 	int					i;
 
-	if (ft_strlen(str) % 21 != 20)
+	if (!str && ft_strlen(str) % 21 != 20)
 		return (NULL);
 	dest = NULL;
 	i = 0;

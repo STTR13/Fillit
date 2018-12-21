@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "../fillit.h"
+#include <stdio.h>
 
 int main(int argc, char const *argv[])
 {
@@ -21,10 +22,12 @@ int main(int argc, char const *argv[])
   if (argc != 2)
   	printf("%s\n", "Seulement un param possible");
   str = file_reader(argv[1]);
+  printf("%s\n", str);
   test = get_tetrilist(str);
+  printf("GT!\n");
   while (test)
   {
-	  print_tetri(test);
+	  print_tetri(test->te);
 	  printf("%s\n", "error : print_tetri");
 	  test = test->next;
   }

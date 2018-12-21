@@ -46,12 +46,12 @@ int main(int argc, char const *argv[])
 	  return (0);
   }
   print_tetriing(dest,16);
-  printf("%d : %c%c%c%c%c%c%c%c\n", move_tetri(dest, -3, 0, 15), BYTE_TO_BINARY(2 & 3));
+  printf("%d : %c%c%c%c%c%c%c%c\n", move_tetri(dest, -1, 0, 10), BYTE_TO_BINARY(2 & 3));
   print_tetriing(dest,16);
-  movetopleft_tetri(dest, 15);
+  movetopleft_tetri(dest, 16);
   printf("\n");
   print_tetriing(dest,16);
-  printf("\032[1;31m");
+ //printf("\032[1;31m");
   printf("%s\n", "YES WE DID IT");
   return 0;
 }

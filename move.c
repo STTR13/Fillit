@@ -24,8 +24,11 @@ static boolean	moveonposx_tetri(tetri *te, int x, unsigned short gsize)
 	i = -1;
 	while (++i < x)
 		t[i] = 0;
-	while (i++ < gsize)
-		t[i] = te->tab[i - x - 1];
+	while (i < gsize)
+	{
+		t[i] = te->tab[i - x];
+		i++;
+	}
 	i = -1;
 	while (++i < gsize)
 		te->tab[i] = t[i];
@@ -45,8 +48,11 @@ static boolean	moveonnegx_tetri(tetri *te, int x, unsigned short gsize)
 	i = gsize;
 	while (--i >= gsize - x)
 		t[i] = 0;
-	while (i-- > 0)
+	while (i >= 0)
+	{
 		t[i] = te->tab[i + x];
+		i--;
+	}
 	i = -1;
 	while (++i < gsize)
 		te->tab[i] = t[i];

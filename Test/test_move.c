@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "../fillit.h"
+#include <stdio.h>
 
 int main(int argc, char const *argv[])
 {

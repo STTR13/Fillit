@@ -21,29 +21,32 @@ static node			*quit(node *dest)
 node				*get_tetrilist(const char *str)
 {
 	node				*dest, *t;
-	boolean				b;
-	int					i;
+	char				c, cmp;
+	tetri				*te;
 
 	if (!str && ft_strlen(str) % 21 != 20)
 		return (NULL);
+	cmp = 'A' + (ft_strlen(str) / 21);
 	dest = NULL;
-	i = 0;
-	while ((b = add_node(&t, getvalid_tetri((char **)(&str), 'A' + i))))
+	t = NULL;
+	c = 'A';
+	while ((te = getvalid_tetri((char **)(&str), c)))
 	{
-		if (*str == '\n')
-			str++;
-		else if (*str == '\0')
-			break ;
-		else
+		if (!add_node(&t, te))
 			return (quit(dest));
 		if (!dest)
 			dest = t;
 		if (t->next)
 			t = t->next;
+		if (*str == '\n')
+			str++;
+		else if (*str == '\0' && c == cmp)
+			return (dest);
+		else
+			return (quit(dest));
+		c++;
 	}
-	if (!b || *str == '\0' || b)
-		return (quit(dest));
-	return (dest);
+	return (quit(dest));
 }
 
 short				len_tetrilist(const node *n)

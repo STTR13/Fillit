@@ -18,7 +18,6 @@ int main(int argc, char const *argv[])
   char *str;
   node *test;
 
-  printf("\033[1;31m");
   if (argc != 2)
   	printf("%s\n", "Seulement un param possible");
   str = file_reader(argv[1]);

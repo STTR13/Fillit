@@ -106,5 +106,6 @@ void			backtrack(grid *g);
 boolean			print_grid(const grid *g);
 void			print_tetri(const tetri *te);
 void			print_tetriing(const tetri *te, unsigned short gsize);
+void			print_tetrilist(const node *n, unsigned short gsize);
 
 #endif

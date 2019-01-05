@@ -46,16 +46,15 @@ boolean	add_node(node **n, tetri *te)
 {
 	node *dest, *t;
 
-	if (!te || !(dest = (node *)malloc(sizeof(node))))
+	if (!te || !(dest = new_node()))
 		return (0);
-	dest->next = NULL;
 	dest->te = te;
 	if (!*n)
 		*n = dest;
 	else
 	{
 		t = *n;
-		while (!t->next)
+		while (t->next)
 			t = t->next;
 		t->next = dest;
 	}

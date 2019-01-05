@@ -47,7 +47,7 @@ boolean			insertetri_grid(grid *g, tetri *te)
 	k = i;
 	while (i < g->gsize && te->tab[i])
 	{
-		if (!(g->tab[i] & te->tab[i]))
+		if (g->tab[i] & te->tab[i])
 			return (0);
 		i++;
 	}

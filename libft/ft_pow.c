@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   backtrack.c                                        :+:      :+:    :+:   */
+/*   ft_pow.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: staeter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/05 14:47:54 by staeter           #+#    #+#             */
-/*   Updated: 2018/12/05 14:47:55 by staeter          ###   ########.fr       */
+/*   Created: 2019/01/11 13:23:03 by staeter           #+#    #+#             */
+/*   Updated: 2019/01/11 13:23:04 by staeter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
-
-static boolean	backtrack_sub(grid *g, node *n)
+int		ft_pow(int x, int y)
 {
-	if (n == NULL)
-		return (1);
-	movetopleft_tetri(n->te, g->gsize);
-	while (incrtetri_grid(g, n->te))
-		if (backtrack_sub(g, n->next))
-			return (1);
-	return (0);
-}
+	int acc;
 
-void			backtrack(grid *g)
-{
-	while (g->gsize <= 16 && !backtrack_sub(g, g->incr))
+	acc = 1;
+	while (y > 0)
 	{
-		g->maxgap += ft_pow(g->gsize + 1, 2) - ft_pow(g->gsize, 2);
-		g->gsize++;
+		acc *= x;
+		y--;
 	}
+	return (acc);
 }

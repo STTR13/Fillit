@@ -33,6 +33,7 @@ int				main(int argc, char const *argv[])
 {
 	char *imp;
 	grid *g;
+	short a;
 
 	if (argc != 2)
 		return (usage(argv[0]));
@@ -41,7 +42,9 @@ int				main(int argc, char const *argv[])
 		!(g->incr = get_tetrilist(imp)))
 		return (error(&imp, &g));
 	free(imp);
-	g->gsize = ft_sqrt(len_tetrilist(g->incr) * 4);
+	a = len_tetrilist(g->incr) * 4;
+	g->gsize = ft_sqrt(a);
+	g->maxgap = ft_pow(g->gsize, 2) - a;
 	backtrack(g);
 	print_grid(g);
 	free_grid(&g);

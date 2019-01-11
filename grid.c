@@ -31,6 +31,7 @@ grid			*new_grid(unsigned short gsize)
 		return (NULL);
 	dest->gsize = gsize;
 	dest->incr = NULL;
+	dest->maxgap = 0;
 	i = 0;
 	while (i < 16)
 		dest->tab[i++] = 0;
@@ -80,10 +81,10 @@ void			rmtetri_grid(grid *g, tetri *te)
 static boolean	incrtetri_grid_sub(grid *g, tetri *te)
 {
 	rmtetri_grid(g, te);
-	if (!move_tetri(te, 0, 1, g->gsize) && !movenextline_tetri(te, g->gsize))
+	if (!move_tetri(te, 0, 1, g->gsize, 2) && !movenextline_tetri(te, g->gsize))
 		return (0);
 	te->ising = insertetri_grid(g, te);
-	if (!te->ising)
+	if (!te->ising || !isvalidgap(g))
 		return (incrtetri_grid_sub(g, te));
 	return (1);
 }

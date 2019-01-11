@@ -65,6 +65,7 @@ typedef struct	s_grid
 	unsigned short	gsize;
 	node			*incr;
 	unsigned short	tab[16];
+	unsigned short	maxgap;
 }				grid;
 /*
 **		grid.c
@@ -74,6 +75,11 @@ grid			*new_grid(unsigned short gsize);
 boolean			insertetri_grid(grid *g, tetri *te);
 void			rmtetri_grid(grid *g, tetri *te);
 boolean			incrtetri_grid(grid *g, tetri *te);
+
+/*
+**		gaps.c
+*/
+boolean			isvalidgap(const grid *g);
 
 /*
 **		reader.c
@@ -91,7 +97,9 @@ tetri			*getvalid_tetri(char **str, char letter);
 /*
 **		move.c
 */
-boolean			move_tetri(tetri *te, int x, int y, unsigned short gsize);
+boolean			move_tetri(tetri *te, int x, int y, unsigned short gsize, short c);
+boolean			isvalidxmove(tetri *te, int x, unsigned short gsize);
+boolean			isvalidymove(tetri *te, int y, unsigned short gsize, int i);
 void			movetopleft_tetri(tetri *te, unsigned short gsize);
 boolean			movenextline_tetri(tetri *te, unsigned short gsize);
 

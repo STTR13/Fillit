@@ -6,15 +6,15 @@
 /*   By: staeter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 16:34:43 by staeter           #+#    #+#             */
-/*   Updated: 2018/11/20 16:34:44 by staeter          ###   ########.fr       */
+/*   Updated: 2019/01/12 13:42:57 by nraziano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void	free_node(node **n)
+void	free_node(t_node **n)
 {
-	node *t;
+	t_node *t;
 
 	if (*n)
 	{
@@ -31,20 +31,21 @@ void	free_node(node **n)
 	}
 }
 
-node	*new_node(void)
+t_node	*new_node(void)
 {
-	node *dest;
+	t_node *dest;
 
-	if (!(dest = (node *)malloc(sizeof(node))))
+	if (!(dest = (t_node *)malloc(sizeof(t_node))))
 		return (NULL);
 	dest->next = NULL;
 	dest->te = NULL;
 	return (dest);
 }
 
-boolean	add_node(node **n, tetri *te)
+t_boolean	add_node(t_node **n, t_tetri *te)
 {
-	node *dest, *t;
+	t_node	*dest;
+	t_node	*t;
 
 	if (!te || !(dest = new_node()))
 		return (0);
@@ -61,9 +62,9 @@ boolean	add_node(node **n, tetri *te)
 	return (1);
 }
 
-void	rm_node(node **n)
+void	rm_node(t_node **n)
 {
-	node *t;
+	t_node *t;
 
 	if (!*n)
 	{

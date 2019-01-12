@@ -6,15 +6,16 @@
 /*   By: staeter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 16:50:22 by staeter           #+#    #+#             */
-/*   Updated: 2018/11/25 16:50:24 by staeter          ###   ########.fr       */
+/*   Updated: 2019/01/12 13:57:59 by nraziano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static void		insertetri_strgrid(char *sg, tetri *te, unsigned short gsize)
+static void		insertetri_strgrid(char *sg, t_tetri *te, unsigned short gsize)
 {
-	short i, j;
+	short	i;
+	short	j;
 
 	i = 0;
 	while (i < gsize)
@@ -30,38 +31,39 @@ static void		insertetri_strgrid(char *sg, tetri *te, unsigned short gsize)
 	}
 }
 
-boolean			print_grid(const grid *g)
+t_boolean			print_grid(const t_grid *g)
 {
 	char	*dest;
-	node	*run;
-	int		i, len;
+	t_node	*run;
+	int		inc[2];
 
-	len = (g->gsize + 1) * g->gsize;
-	if (!(dest = ft_strnew(len)))
+	inc[1] = (g->gsize + 1) * g->gsize;
+	if (!(dest = ft_strnew(inc[1])))
 		return (0);
-	i = 1;
-	while (i <= len)
+	inc[0] = 1;
+	while (inc[0] <= inc[1])
 	{
-		if (i && !(i % (g->gsize + 1)))
-			dest[i - 1] = '\n';
+		if (inc[0] && !(inc[0] % (g->gsize + 1)))
+			dest[inc[0] - 1] = '\n';
 		else
-			dest[i - 1] = '.';
-		i++;
+			dest[inc[0] - 1] = '.';
+		inc[0]++;
 	}
 	run = g->incr;
 	while (run)
 	{
 		insertetri_strgrid(dest, run->te, g->gsize);
-		run = run ->next;
+		run = run->next;
 	}
 	ft_putstr(dest);
 	free(dest);
 	return (1);
 }
 
-void			print_tetri(const tetri *te)
+void			print_tetri(const t_tetri *te)
 {
-	short i, j;
+	short	i;
+	short	j;
 
 	i = 0;
 	while (i < 4)
@@ -80,9 +82,10 @@ void			print_tetri(const tetri *te)
 	}
 }
 
-void			print_tetriing(const tetri *te, unsigned short gsize)
+void			print_tetriing(const t_tetri *te, unsigned short gsize)
 {
-	short i, j;
+	short	i;
+	short	j;
 
 	if (gsize <= 16)
 	{
@@ -104,7 +107,7 @@ void			print_tetriing(const tetri *te, unsigned short gsize)
 	}
 }
 
-void			print_tetrilist(const node *n, unsigned short gsize)
+void			print_tetrilist(const t_node *n, unsigned short gsize)
 {
 	if (n)
 	{

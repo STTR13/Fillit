@@ -6,13 +6,13 @@
 /*   By: staeter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 15:25:20 by staeter           #+#    #+#             */
-/*   Updated: 2018/12/05 15:25:21 by staeter          ###   ########.fr       */
+/*   Updated: 2019/01/12 13:41:57 by nraziano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static int		usage(const char *s)
+static	int		usage(const char *s)
 {
 	write(1, "Usage:\t", 7);
 	ft_putstr(s);
@@ -20,7 +20,7 @@ static int		usage(const char *s)
 	return (0);
 }
 
-static int		error(char **imp, grid **g)
+static	int		error(char **imp, t_grid **g)
 {
 	free(*imp);
 	*imp = NULL;
@@ -31,9 +31,9 @@ static int		error(char **imp, grid **g)
 
 int				main(int argc, char const *argv[])
 {
-	char *imp;
-	grid *g;
-	short a;
+	char	*imp;
+	t_grid	*g;
+	short	a;
 
 	if (argc != 2)
 		return (usage(argv[0]));

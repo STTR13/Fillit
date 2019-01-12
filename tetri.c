@@ -6,24 +6,24 @@
 /*   By: staeter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/18 11:45:46 by staeter           #+#    #+#             */
-/*   Updated: 2018/11/18 11:45:47 by staeter          ###   ########.fr       */
+/*   Updated: 2019/01/12 14:16:39 by nraziano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void	free_tetri(tetri **te)
+void	free_tetri(t_tetri **te)
 {
 	free(*te);
 	*te = NULL;
 }
 
-tetri	*new_tetri(void)
+t_tetri	*new_tetri(void)
 {
-	tetri	*dest;
+	t_tetri	*dest;
 	short	i;
 
-	if (!(dest = (tetri *)malloc(sizeof(tetri))))
+	if (!(dest = (t_tetri *)malloc(sizeof(t_tetri))))
 		return (NULL);
 	dest->letter = '\0';
 	dest->ising = 0;
@@ -33,9 +33,10 @@ tetri	*new_tetri(void)
 	return (dest);
 }
 
-boolean	fill_tetri(tetri *te, char **str, char letter)
+t_boolean	fill_tetri(t_tetri *te, char **str, char letter)
 {
-	unsigned short	i, j;
+	unsigned short	i;
+	unsigned short	j;
 
 	te->letter = letter;
 	i = 0;
@@ -61,9 +62,9 @@ boolean	fill_tetri(tetri *te, char **str, char letter)
 	return (1);
 }
 
-tetri	*fillnew_tetri(char **str, char letter)
+t_tetri	*fillnew_tetri(char **str, char letter)
 {
-	tetri *dest;
+	t_tetri *dest;
 
 	if (!(dest = new_tetri())
 	|| !fill_tetri(dest, str, letter))

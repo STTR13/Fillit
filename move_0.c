@@ -77,7 +77,7 @@ static void		moveony_tetri(t_tetri *te, int y, unsigned short gsize, int i)
 ** c = 3 -> test all
 */
 
-t_boolean			move_tetri(t_tetri *te, int x, int y,
+t_boolean		move_tetri(t_tetri *te, int x, int y,
 				unsigned short gsize)
 {
 	int				i;

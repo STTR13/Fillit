@@ -97,7 +97,7 @@ t_tetri				*getvalid_tetri(char **str, char letter);
 **		move.c
 */
 t_boolean			move_tetri(t_tetri *te, int x, int y,
-					unsigned short gsize, short c);
+					unsigned short gsize);
 t_boolean			isvalidxmove(t_tetri *te, int x, unsigned short gsize);
 t_boolean			isvalidymove(t_tetri *te, int y,
 					unsigned short gsize, int i);

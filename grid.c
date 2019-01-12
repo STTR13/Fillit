@@ -38,7 +38,7 @@ t_grid			*new_grid(unsigned short gsize)
 	return (dest);
 }
 
-t_boolean			insertetri_grid(t_grid *g, t_tetri *te)
+t_boolean		insertetri_grid(t_grid *g, t_tetri *te)
 {
 	unsigned short	i;
 	unsigned short	k;

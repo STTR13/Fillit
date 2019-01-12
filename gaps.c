@@ -30,7 +30,7 @@ static unsigned short	get_gap(unsigned short t[16], short x, short y,
 	return (acc);
 }
 
-t_boolean					isvalidgap(const t_grid *g)
+t_boolean				isvalidgap(const t_grid *g)
 {
 	unsigned short	t[16];
 	short			i;

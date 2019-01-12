@@ -12,7 +12,7 @@
 
 #include "fillit.h"
 
-void	free_node(t_node **n)
+void		free_node(t_node **n)
 {
 	t_node *t;
 
@@ -31,7 +31,7 @@ void	free_node(t_node **n)
 	}
 }
 
-t_node	*new_node(void)
+t_node		*new_node(void)
 {
 	t_node *dest;
 
@@ -62,7 +62,7 @@ t_boolean	add_node(t_node **n, t_tetri *te)
 	return (1);
 }
 
-void	rm_node(t_node **n)
+void		rm_node(t_node **n)
 {
 	t_node *t;
 

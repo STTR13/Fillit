@@ -15,7 +15,7 @@
 static	t_boolean	incrtetri_grid_sub(t_grid *g, t_tetri *te)
 {
 	rmtetri_grid(g, te);
-	if (!move_tetri(te, 0, 1, g->gsize, 2) && !movenextline_tetri(te, g->gsize))
+	if (!move_tetri(te, 0, 1, g->gsize) && !movenextline_tetri(te, g->gsize))
 		return (0);
 	te->ising = insertetri_grid(g, te);
 	if (!te->ising || !isvalidgap(g))

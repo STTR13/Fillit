@@ -12,13 +12,13 @@
 
 #include "fillit.h"
 
-void	free_tetri(t_tetri **te)
+void		free_tetri(t_tetri **te)
 {
 	free(*te);
 	*te = NULL;
 }
 
-t_tetri	*new_tetri(void)
+t_tetri		*new_tetri(void)
 {
 	t_tetri	*dest;
 	short	i;
@@ -62,7 +62,7 @@ t_boolean	fill_tetri(t_tetri *te, char **str, char letter)
 	return (1);
 }
 
-t_tetri	*fillnew_tetri(char **str, char letter)
+t_tetri		*fillnew_tetri(char **str, char letter)
 {
 	t_tetri *dest;
 

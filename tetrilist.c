@@ -12,7 +12,7 @@
 
 #include "fillit.h"
 
-static t_node			*quit(t_node *dest)
+static t_node		*quit(t_node *dest)
 {
 	free_node(&dest);
 	return (NULL);

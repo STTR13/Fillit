@@ -12,7 +12,7 @@
 
 #include "fillit.h"
 
-static void		insertetri_strgrid(char *sg, t_tetri *te, unsigned short gsize)
+static void	insertetri_strgrid(char *sg, t_tetri *te, unsigned short gsize)
 {
 	short	i;
 	short	j;
@@ -31,7 +31,7 @@ static void		insertetri_strgrid(char *sg, t_tetri *te, unsigned short gsize)
 	}
 }
 
-t_boolean			print_grid(const t_grid *g)
+t_boolean	print_grid(const t_grid *g)
 {
 	char	*dest;
 	t_node	*run;
@@ -60,7 +60,7 @@ t_boolean			print_grid(const t_grid *g)
 	return (1);
 }
 
-void			print_tetri(const t_tetri *te)
+void		print_tetri(const t_tetri *te)
 {
 	short	i;
 	short	j;
@@ -82,7 +82,7 @@ void			print_tetri(const t_tetri *te)
 	}
 }
 
-void			print_tetriing(const t_tetri *te, unsigned short gsize)
+void		print_tetriing(const t_tetri *te, unsigned short gsize)
 {
 	short	i;
 	short	j;
@@ -107,7 +107,7 @@ void			print_tetriing(const t_tetri *te, unsigned short gsize)
 	}
 }
 
-void			print_tetrilist(const t_node *n, unsigned short gsize)
+void		print_tetrilist(const t_node *n, unsigned short gsize)
 {
 	if (n)
 	{

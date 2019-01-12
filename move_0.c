@@ -76,11 +76,14 @@ static void		moveony_tetri(t_tetri *te, int y, unsigned short gsize, int i)
 ** c = 2 -> test y move
 ** c = 3 -> test all
 */
-t_boolean			move_tetri(t_tetri *te, int x, int y,
-				unsigned short gsize, short c)
+
+t_boolean		move_tetri(t_tetri *te, int x, int y,
+				unsigned short gsize)
 {
 	int				i;
+	short			c;
 
+	c = 3;
 	if ((c == 1 || c == 3) && !isvalidxmove(te, x, gsize))
 		return (0);
 	i = 0;

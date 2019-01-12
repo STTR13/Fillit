@@ -16,7 +16,7 @@ SRC = $(wildcard ./*.c)
 INCLUDES = $(wildcard ./*.h)
 OBJ = $(SRC:.c=.o)
 PATH_LIB = libft/
-LIBFT = libft/libft.a
+LIBFT = $(PATH_LIB)libft.a
 CC = gcc
 FLAG = -Wall -Wextra -Werror
 

@@ -48,7 +48,7 @@ int				main(int argc, char const *argv[])
 	backtrack(g);
 	print_grid(g);
 	free_grid(&g);
-	while(1)
+	while (1)
 		a++;
 	return (0);
 }

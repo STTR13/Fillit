@@ -20,33 +20,30 @@ static t_node		*quit(t_node *dest)
 
 t_node				*get_tetrilist(const char *str)
 {
-	t_node				*dest, *t;
-	char				c, cmp;
+	t_node				*var[2];
+	char				c[2];
 	t_tetri				*te;
 
 	if (!str && ft_strlen(str) % 21 != 20)
 		return (NULL);
-	cmp = 'A' + (ft_strlen(str) / 21);
-	dest = NULL;
-	t = NULL;
-	c = 'A';
-	while ((te = getvalid_tetri((char **)(&str), c)))
+	c[1] = 'A' + (ft_strlen(str) / 21);
+	var[0] = NULL;
+	var[1] = NULL;
+	c[0] = 'A' - 1;
+	while ((te = getvalid_tetri((char **)(&str), ++c[0])))
 	{
-		if (!add_node(&t, te))
-			return (quit(dest));
-		if (!dest)
-			dest = t;
-		if (t->next)
-			t = t->next;
+		if (!add_node(&var[1], te))
+			return (quit(var[0]));
+		if (!var[0])
+			var[0] = var[1];
+		if (var[1]->next)
+			var[1] = var[1]->next;
 		if (*str == '\n')
 			str++;
-		else if (*str == '\0' && c == cmp)
-			return (dest);
 		else
-			return (quit(dest));
-		c++;
+			return ((*str == '\0' && c[0] == c[1]) ? var[0] : quit(var[0]));
 	}
-	return (quit(dest));
+	return (quit(var[0]));
 }
 
 short				len_tetrilist(const t_node *n)

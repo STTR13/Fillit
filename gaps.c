@@ -48,7 +48,7 @@ boolean					isvalidgap(const grid *g)
 			if (!(t[i] & (1 << j)))
 			{
 				a = get_gap(t, i, j, g->gsize);
-				gap += (a > 3) ? 0 : a;
+				gap += a % 4;
 				if (gap > g->maxgap)
 					return (0);
 			}

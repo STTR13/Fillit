@@ -6,13 +6,13 @@
 /*   By: staeter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/18 14:04:47 by staeter           #+#    #+#             */
-/*   Updated: 2018/11/18 14:04:48 by staeter          ###   ########.fr       */
+/*   Updated: 2019/01/12 13:47:29 by nraziano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static void		moveonposx_tetri(tetri *te, int x, unsigned short gsize)
+static void		moveonposx_tetri(t_tetri *te, int x, unsigned short gsize)
 {
 	unsigned short	t[16];
 	int				i;
@@ -30,7 +30,7 @@ static void		moveonposx_tetri(tetri *te, int x, unsigned short gsize)
 		te->tab[i] = t[i];
 }
 
-static void		moveonnegx_tetri(tetri *te, int x, unsigned short gsize)
+static void		moveonnegx_tetri(t_tetri *te, int x, unsigned short gsize)
 {
 	unsigned short	t[16];
 	int				i;
@@ -49,7 +49,7 @@ static void		moveonnegx_tetri(tetri *te, int x, unsigned short gsize)
 		te->tab[i] = t[i];
 }
 
-static void		moveony_tetri(tetri *te, int y, unsigned short gsize, int i)
+static void		moveony_tetri(t_tetri *te, int y, unsigned short gsize, int i)
 {
 	if (y > 0)
 	{
@@ -76,7 +76,8 @@ static void		moveony_tetri(tetri *te, int y, unsigned short gsize, int i)
 ** c = 2 -> test y move
 ** c = 3 -> test all
 */
-boolean			move_tetri(tetri *te, int x, int y, unsigned short gsize, short c)
+t_boolean			move_tetri(t_tetri *te, int x, int y,
+				unsigned short gsize, short c)
 {
 	int				i;
 

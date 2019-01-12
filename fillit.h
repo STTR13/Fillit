@@ -6,7 +6,7 @@
 /*   By: staeter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/17 17:00:51 by staeter           #+#    #+#             */
-/*   Updated: 2018/11/17 17:00:53 by staeter          ###   ########.fr       */
+/*   Updated: 2019/01/12 13:31:40 by nraziano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,9 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
-
-typedef char	boolean;
-
 # include "libft/includes/libft.h"
+
+typedef char		t_boolean;
 
 /*
 **	0 -- > y
@@ -27,93 +26,95 @@ typedef char	boolean;
 **	v		te->tab[x] & (1 << y) == value in (x,y)
 **	x
 */
-typedef struct	s_tetri
+typedef struct		s_tetri
 {
 	char			letter;
 	unsigned short	tab[16];
-	boolean			ising;
-}				tetri;
+	t_boolean		ising;
+}					t_tetri;
 /*
 **		tetri.c
 */
-void			free_tetri(tetri **te);
-tetri			*new_tetri(void);
-boolean			fill_tetri(tetri *te, char **str, char letter);
-tetri			*fillnew_tetri(char **str, char letter);
+void				free_tetri(t_tetri **te);
+t_tetri				*new_tetri(void);
+t_boolean			fill_tetri(t_tetri *te, char **str, char letter);
+t_tetri				*fillnew_tetri(char **str, char letter);
 
-typedef struct	s_node
+typedef struct		s_node
 {
-	tetri			*te;
+	t_tetri			*te;
 	struct s_node	*next;
-}				node;
+}					t_node;
 /*
 **		node.c
 */
-void			free_node(node **n);
-node			*new_node(void);
-boolean			add_node(node **n, tetri *te);
-void			rm_node(node **n);
+void				free_node(t_node **n);
+t_node				*new_node(void);
+t_boolean			add_node(t_node **n, t_tetri *te);
+void				rm_node(t_node **n);
 
 /*
 **		tetrilist.c
 */
-node			*get_tetrilist(const char *str);
-short			len_tetrilist(const node *n);
+t_node				*get_tetrilist(const char *str);
+short				len_tetrilist(const t_node *n);
 
-typedef struct	s_grid
+typedef struct		s_grid
 {
 	unsigned short	gsize;
-	node			*incr;
+	t_node			*incr;
 	unsigned short	tab[16];
 	unsigned short	maxgap;
-}				grid;
+}					t_grid;
 /*
 **		grid.c
 */
-void			free_grid(grid **g);
-grid			*new_grid(unsigned short gsize);
-boolean			insertetri_grid(grid *g, tetri *te);
-void			rmtetri_grid(grid *g, tetri *te);
-boolean			incrtetri_grid(grid *g, tetri *te);
+void				free_grid(t_grid **g);
+t_grid				*new_grid(unsigned short gsize);
+t_boolean			insertetri_grid(t_grid *g, t_tetri *te);
+void				rmtetri_grid(t_grid *g, t_tetri *te);
+t_boolean			incrtetri_grid(t_grid *g, t_tetri *te);
 
 /*
 **		gaps.c
 */
-boolean			isvalidgap(const grid *g);
+t_boolean			isvalidgap(const t_grid *g);
 
 /*
 **		reader.c
 */
-char			*reader(int filedesc);
-char			*standi_reader(void);
-char			*file_reader(const char *filename);
+char				*reader(int filedesc);
+char				*standi_reader(void);
+char				*file_reader(const char *filename);
 
 /*
 **		check.c
 */
-int				isvalid_tetri(const tetri *te, unsigned short gsize);
-tetri			*getvalid_tetri(char **str, char letter);
+int					isvalid_tetri(const t_tetri *te, unsigned short gsize);
+t_tetri				*getvalid_tetri(char **str, char letter);
 
 /*
 **		move.c
 */
-boolean			move_tetri(tetri *te, int x, int y, unsigned short gsize, short c);
-boolean			isvalidxmove(tetri *te, int x, unsigned short gsize);
-boolean			isvalidymove(tetri *te, int y, unsigned short gsize, int i);
-void			movetopleft_tetri(tetri *te, unsigned short gsize);
-boolean			movenextline_tetri(tetri *te, unsigned short gsize);
+t_boolean			move_tetri(t_tetri *te, int x, int y,
+					unsigned short gsize, short c);
+t_boolean			isvalidxmove(t_tetri *te, int x, unsigned short gsize);
+t_boolean			isvalidymove(t_tetri *te, int y,
+					unsigned short gsize, int i);
+void				movetopleft_tetri(t_tetri *te, unsigned short gsize);
+t_boolean			movenextline_tetri(t_tetri *te, unsigned short gsize);
 
 /*
 **		backtrack.c
 */
-void			backtrack(grid *g);
+void				backtrack(t_grid *g);
 
 /*
 **		print.c
 */
-boolean			print_grid(const grid *g);
-void			print_tetri(const tetri *te);
-void			print_tetriing(const tetri *te, unsigned short gsize);
-void			print_tetrilist(const node *n, unsigned short gsize);
+t_boolean			print_grid(const t_grid *g);
+void				print_tetri(const t_tetri *te);
+void				print_tetriing(const t_tetri *te, unsigned short gsize);
+void				print_tetrilist(const t_node *n, unsigned short gsize);
 
 #endif

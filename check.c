@@ -6,13 +6,13 @@
 /*   By: staeter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/17 16:58:55 by staeter           #+#    #+#             */
-/*   Updated: 2018/11/17 16:58:57 by staeter          ###   ########.fr       */
+/*   Updated: 2019/01/12 13:35:35 by nraziano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static unsigned int	linkcount(int i, int j, const tetri *te)
+static unsigned int	linkcount(int i, int j, const t_tetri *te)
 {
 	unsigned int count;
 
@@ -28,10 +28,12 @@ static unsigned int	linkcount(int i, int j, const tetri *te)
 	return (count);
 }
 
-int					isvalid_tetri(const tetri *te, unsigned short gsize)
+int					isvalid_tetri(const t_tetri *te, unsigned short gsize)
 {
-	int				i, j;
-	unsigned int	bitcounter, linkcounter;
+	int				i;
+	int				j;
+	unsigned int	bitcounter;
+	unsigned int	linkcounter;
 
 	bitcounter = 0;
 	linkcounter = 0;
@@ -55,9 +57,9 @@ int					isvalid_tetri(const tetri *te, unsigned short gsize)
 	return (1);
 }
 
-tetri				*getvalid_tetri(char **str, char letter)
+t_tetri				*getvalid_tetri(char **str, char letter)
 {
-	tetri	*dest;
+	t_tetri	*dest;
 
 	if (!(dest = fillnew_tetri(str, letter))
 	|| !isvalid_tetri(dest, 4))

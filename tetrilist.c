@@ -6,23 +6,23 @@
 /*   By: staeter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 14:56:12 by staeter           #+#    #+#             */
-/*   Updated: 2018/11/25 14:56:13 by staeter          ###   ########.fr       */
+/*   Updated: 2019/01/12 14:05:11 by nraziano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static node			*quit(node *dest)
+static t_node			*quit(t_node *dest)
 {
 	free_node(&dest);
 	return (NULL);
 }
 
-node				*get_tetrilist(const char *str)
+t_node				*get_tetrilist(const char *str)
 {
-	node				*dest, *t;
+	t_node				*dest, *t;
 	char				c, cmp;
-	tetri				*te;
+	t_tetri				*te;
 
 	if (!str && ft_strlen(str) % 21 != 20)
 		return (NULL);
@@ -49,7 +49,7 @@ node				*get_tetrilist(const char *str)
 	return (quit(dest));
 }
 
-short				len_tetrilist(const node *n)
+short				len_tetrilist(const t_node *n)
 {
 	short i;
 

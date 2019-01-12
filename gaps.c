@@ -6,7 +6,7 @@
 /*   By: staeter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 13:14:45 by staeter           #+#    #+#             */
-/*   Updated: 2019/01/11 13:14:47 by staeter          ###   ########.fr       */
+/*   Updated: 2019/01/12 13:33:59 by nraziano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,13 @@ static unsigned short	get_gap(unsigned short t[16], short x, short y,
 	return (acc);
 }
 
-boolean					isvalidgap(const grid *g)
+t_boolean					isvalidgap(const t_grid *g)
 {
 	unsigned short	t[16];
-	short			i, j;
-	unsigned short	gap, a;
+	short			i;
+	short			j;
+	unsigned short	gap;
+	unsigned short	a;
 
 	i = -1;
 	while (++i < g->gsize)
@@ -44,7 +46,7 @@ boolean					isvalidgap(const grid *g)
 	while (++i < g->gsize)
 	{
 		j = -1;
-		while(t[i] && ++j < g->gsize)
+		while (t[i] && ++j < g->gsize)
 			if (!(t[i] & (1 << j)))
 			{
 				a = get_gap(t, i, j, g->gsize);

@@ -12,7 +12,7 @@
 
 #include "fillit.h"
 
-static boolean	backtrack_sub(grid *g, node *n)
+static	t_boolean	backtrack_sub(t_grid *g, t_node *n)
 {
 	if (n == NULL)
 		return (1);
@@ -23,7 +23,7 @@ static boolean	backtrack_sub(grid *g, node *n)
 	return (0);
 }
 
-void			backtrack(grid *g)
+void				backtrack(t_grid *g)
 {
 	while (g->gsize <= 16 && !backtrack_sub(g, g->incr))
 	{

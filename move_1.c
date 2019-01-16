@@ -12,7 +12,7 @@
 
 #include "fillit.h"
 
-t_boolean	isvalidxmove(t_tetri *te, int x, unsigned short gsize)
+t_boolean			isvalidxmove(t_tetri *te, int x, unsigned short gsize)
 {
 	int				i;
 
@@ -38,7 +38,8 @@ t_boolean	isvalidxmove(t_tetri *te, int x, unsigned short gsize)
 	return (1);
 }
 
-t_boolean	isvalidymove_01(t_tetri *te, int y, unsigned short gsize, int i)
+static t_boolean	isvalidymove_sub(t_tetri *te, int y,
+					unsigned short gsize, int i)
 {
 	int		j;
 
@@ -53,7 +54,8 @@ t_boolean	isvalidymove_01(t_tetri *te, int y, unsigned short gsize, int i)
 	return (1);
 }
 
-t_boolean	isvalidymove(t_tetri *te, int y, unsigned short gsize, int i)
+t_boolean			isvalidymove(t_tetri *te, int y,
+					unsigned short gsize, int i)
 {
 	int				j;
 
@@ -74,14 +76,14 @@ t_boolean	isvalidymove(t_tetri *te, int y, unsigned short gsize, int i)
 	{
 		if (y <= -(int)(gsize))
 			return (0);
-		if (isvalidymove_01(te, y, gsize, i) == 0)
+		if (isvalidymove_sub(te, y, gsize, i) == 0)
 			return (0);
 		y *= -1;
 	}
 	return (1);
 }
 
-void		movetopleft_tetri(t_tetri *te, unsigned short gsize)
+void				movetopleft_tetri(t_tetri *te, unsigned short gsize)
 {
 	int	x;
 	int	y;
@@ -104,7 +106,7 @@ void		movetopleft_tetri(t_tetri *te, unsigned short gsize)
 	move_tetri(te, -x, -y, gsize);
 }
 
-t_boolean	movenextline_tetri(t_tetri *te, unsigned short gsize)
+t_boolean			movenextline_tetri(t_tetri *te, unsigned short gsize)
 {
 	int	y;
 	int	i;

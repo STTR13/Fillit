@@ -24,18 +24,17 @@ FLAG = -Wall -Wextra -Werror
 
 all: $(NAME)
 
-$(NAME): lib
-	@$(CC) $(FLAG) -c $(SRC) -I $(INCLUDES)
-	@$(CC) $(FLAG) $(OBJ) $(LIBFT) -o $(NAME)
+$(NAME):
+	make -C $(PATH_LIB)
+	$(CC) $(FLAG) -c $(SRC) -I $(INCLUDES)
+	$(CC) $(FLAG) $(OBJ) $(LIBFT) -o $(NAME)
 
 clean:
-	@/bin/rm -f $(OBJ)
+	make clean -C $(PATH_LIB)
+	/bin/rm -f $(OBJ)
 
 fclean: clean
-	@/bin/rm -f $(NAME)
-	@make fclean -C $(PATH_LIB)
+	/bin/rm -f $(NAME)
+	make fclean -C $(PATH_LIB)
 
 re: fclean all
-
-lib:
-	@make re -C $(PATH_LIB)

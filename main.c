@@ -29,6 +29,18 @@ static	int		error(char **imp, t_grid **g)
 	return (1);
 }
 
+static void		valid_gsize(t_grid *g)
+{
+	if (g->gsize == 2 && (g->incr->te->tab[0] != 3 || g->incr->te->tab[1] != 3))
+		g->gsize = 3;
+	if (g->gsize == 3 && ((
+		g->incr->te->tab[0] == 1 &&
+		g->incr->te->tab[1] == 1 &&
+		g->incr->te->tab[2] == 1 &&
+		g->incr->te->tab[3] == 1) || (g->incr->te->tab[0] == 15)))
+		g->gsize = 4;
+}
+
 int				main(int argc, char const *argv[])
 {
 	char	*imp;
@@ -44,6 +56,7 @@ int				main(int argc, char const *argv[])
 	free(imp);
 	a = len_tetrilist(g->incr) * 4;
 	g->gsize = ft_sqrt(a);
+	valid_gsize(g);
 	g->maxgap = ft_pow(g->gsize, 2) - a;
 	backtrack(g);
 	print_grid(g);

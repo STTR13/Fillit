@@ -24,7 +24,7 @@ t_node				*get_tetrilist(const char *str)
 	char				c[2];
 	t_tetri				*te;
 
-	if (!str && ft_strlen(str) % 21 != 20)
+	if (!str || !(ft_strlen(str) <= 545 && ft_strlen(str) % 21 == 20))
 		return (NULL);
 	c[1] = 'A' + (ft_strlen(str) / 21);
 	var[0] = NULL;

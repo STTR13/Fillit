@@ -29,16 +29,25 @@ static	int		error(char **imp, t_grid **g)
 	return (1);
 }
 
-static void		valid_gsize(t_grid *g)
+static void		valid_gsize_sub(t_grid *g, t_node *n)
 {
-	if (g->gsize == 2 && (g->incr->te->tab[0] != 3 || g->incr->te->tab[1] != 3))
+	if (!n)
+		return ;
+	if (g->gsize == 2 && (n->te->tab[0] != 3 || n->te->tab[1] != 3))
 		g->gsize = 3;
 	if (g->gsize == 3 && ((
-		g->incr->te->tab[0] == 1 &&
-		g->incr->te->tab[1] == 1 &&
-		g->incr->te->tab[2] == 1 &&
-		g->incr->te->tab[3] == 1) || (g->incr->te->tab[0] == 15)))
+		n->te->tab[0] == 1 &&
+		n->te->tab[1] == 1 &&
+		n->te->tab[2] == 1 &&
+		n->te->tab[3] == 1) || (n->te->tab[0] == 15)))
 		g->gsize = 4;
+	valid_gsize_sub(g, n->next);
+}
+
+static void		valid_gsize(t_grid *g)
+{
+	if (g->gsize <= 3)
+		valid_gsize_sub(g, g->incr);
 }
 
 int				main(int argc, char const *argv[])
